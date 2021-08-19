@@ -813,7 +813,7 @@ for (( i=0; i < ${#ZABBIX_ARRAY_LDAP_GroupMember_RAW[*]}; i++ )); do
         Print_Verbose_Text "Found UserId" "${ZABBIX_ARRAY_LDAP_GroupMember_RAW[$i]}"
         #printf "."
     fi
-    if [ "${ZABBIX_ARRAY_LDAP_GroupMember_RAW[$i]}" = "alias" ]; then
+    if [ "${ZABBIX_ARRAY_LDAP_GroupMember_RAW[$i]}" = "username" ]; then
         i=$(($i + 2))
         ZABBIX_ARRAY_LDAP_GroupMember_alias+=("${ZABBIX_ARRAY_LDAP_GroupMember_RAW[$i]}")
         Print_Verbose_Text "Found Alias" "${ZABBIX_ARRAY_LDAP_GroupMember_RAW[$i]}"
