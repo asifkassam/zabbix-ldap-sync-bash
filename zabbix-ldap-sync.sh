@@ -948,7 +948,7 @@ if [ "$b_Must_Sync_Users" = "true" ]; then
             i=$(($i + 2))
             ZABBIX_ARRAY_AllUser_userid+=("${ZABBIX_ARRAY_AllUser_RAW[$i]}")
         fi
-        if [ "${ZABBIX_ARRAY_AllUser_RAW[$i]}" = "alias" ]; then
+        if [ "${ZABBIX_ARRAY_AllUser_RAW[$i]}" = "username" ]; then
             i=$(($i + 2))
             ZABBIX_ARRAY_AllUser_alias+=("${ZABBIX_ARRAY_AllUser_RAW[$i]}")
         fi
@@ -1293,14 +1293,13 @@ if [ "$b_Must_Sync_Users" = "true" ]; then
         echo "STEP 10: Replace Members of Group $ZABBIX_Disabled_User_Group"
     fi
     tempvar=""
-    # maybe the list is empty! So we have to check
-    # if [ "$list_of_userids" != "" ]; then list_of_userids=${list_of_userids::-1}; fi
     list_of_userids=""
     for (( i=0; i < ${#new_ZABBIX_ARRAY_disabled_User_userid[*]}; i++ )); do
         list_of_userids+='"'${new_ZABBIX_ARRAY_disabled_User_userid[$i]}'"'
         list_of_userids+=","
     done
-    list_of_userids=${list_of_userids::-1}
+    # maybe the list is empty! So we have to check
+    if [ "$list_of_userids" != "" ]; then list_of_userids=${list_of_userids::-1}; fi
     if [ "$b_verbose" = "true" ]; then
         printf 'curl -k -s -X POST -H "Content-Type:application/json"  -d '
         printf "'"
